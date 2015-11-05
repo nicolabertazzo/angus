@@ -2,16 +2,18 @@
 
 var ngHtml2Js = require('gulp-ng-html2js');
 var streamqueue = require('streamqueue');
+var angularFilesort = require('gulp-angular-filesort');
 
 module.exports = {
     jsApp: function (angus, gulp) {
-        return gulp.src([
+        var src = gulp.src([
                 angus.appPath + '/src/core/**/*.js',
                 '!' + angus.appPath + '/src/core/**/*.e2e.*.js',
                 '!' + angus.appPath + '/src/core/**/*.unit.*.js'
             ], {
             base: angus.appPath + '/src/'
         });
+        return angus.appConfig.usesAngularJS?src.pipe(angularFilesort()):src;
     },
     coffeeApp: function (angus, gulp) {
         return gulp.src([

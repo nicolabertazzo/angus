@@ -53,13 +53,14 @@ module.exports = function (angus, gulp) {
     });
     
   //var vendorStream = gulp.src(['js/bower_components/**/*.js'],{cwd: angus.appPath+"/dist"});
-  var appStream = gulp.src(['js/**/*.js', '!js/{bower_components,bower_components/**}'],{cwd: angus.appPath+"/dist"});      
+  var appStream = gulp.src(['js/**/*.js', '!js/{bower_components,bower_components/**}'],{cwd: angus.appPath+"/dist"});
+  
 
     return function () {
         return gulp.src(angus.appPath + '/src/*.html')
             .pipe(replace(/<!-- autoInclude: css !-->/g, autoInclude.css))
             .pipe(replace(/<!-- autoInclude: jsLib !-->/g, autoInclude.jsLib))
-            .pipe(inject(appStream.pipe(angularFilesort())))
+            .pipe(inject(angus.appConfig.usesAngularJS?appStream.pipe(angularFilesort()):appStream))
             //.pipe(replace(/<!-- autoInclude: jsApp !-->/g, autoInclude.jsApp))
             .pipe(replace(/@@minified/g, angus.env === 'dev' ? '' : '.min'))
             .pipe(gulp.dest(angus.appPath + '/dist'))
