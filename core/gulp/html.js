@@ -4,6 +4,9 @@ var replace = require('gulp-replace');
 var connect = require('gulp-connect');
 var walkDir = require('walkdir');
 var path = require('path');
+var angularFilesort = require('gulp-angular-filesort');
+var inject = require('gulp-inject');
+//var series = require('stream-series');
 
 module.exports = function (angus, gulp) {
 
@@ -48,12 +51,16 @@ module.exports = function (angus, gulp) {
             autoInclude.jsApp += '<script src="' + filePath.replace(/\\/g, '/') + '"></script>\n    ';
         }
     });
+    
+  //var vendorStream = gulp.src(['js/bower_components/**/*.js'],{cwd: angus.appPath+"/dist"});
+  var appStream = gulp.src(['js/**/*.js', '!js/{bower_components,bower_components/**}'],{cwd: angus.appPath+"/dist"});      
 
     return function () {
         return gulp.src(angus.appPath + '/src/*.html')
             .pipe(replace(/<!-- autoInclude: css !-->/g, autoInclude.css))
             .pipe(replace(/<!-- autoInclude: jsLib !-->/g, autoInclude.jsLib))
-            .pipe(replace(/<!-- autoInclude: jsApp !-->/g, autoInclude.jsApp))
+            .pipe(inject(appStream.pipe(angularFilesort())))
+            //.pipe(replace(/<!-- autoInclude: jsApp !-->/g, autoInclude.jsApp))
             .pipe(replace(/@@minified/g, angus.env === 'dev' ? '' : '.min'))
             .pipe(gulp.dest(angus.appPath + '/dist'))
             .pipe(connect.reload());
