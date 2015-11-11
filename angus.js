@@ -62,8 +62,9 @@ if (args.length > 0) {
             var cmd = 'npm uninstall wav speaker';
             shell.exec(cmd);
         }
-    }
-    else {
+    } else if (args[0] === 'version') {
+        console.log(gutil.colors.white('Angus v' + pkg.version));
+    } else {
         console.log(gutil.colors.white('Angus v' + pkg.version));
 
         var angusLocation = cwd + '/angus.config.js';
@@ -86,7 +87,10 @@ else {
         'create     Creates an app folder with basic structure',
         'dev        Runs Angus in development mode (must be inside app directory)',
         'prod       Runs Angus in production mode (must be inside app directory)',
+        'buildDev   Compiles the app in dev mode for distribution',
+        'buildProd  Compiles the app in prod mode for distribution',
         'sound      Configure Angus to use sounds on build success/failure',
+        'version    Display Angus version',
         '',
         'Any other command will be parsed as a gulp task. Please see the angus/core/gulp/ folder for available tasks.'].join('\n'));
 }
