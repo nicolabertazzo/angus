@@ -60,7 +60,7 @@ module.exports = function (angus, gulp) {
         return gulp.src(angus.appPath + '/src/*.html')
             .pipe(replace(/<!-- autoInclude: css !-->/g, autoInclude.css))
             .pipe(replace(/<!-- autoInclude: jsLib !-->/g, autoInclude.jsLib))
-            .pipe(inject(angus.appConfig.usesAngularJS?appStream.pipe(angularFilesort()):appStream))
+            .pipe(inject(angus.appConfig.usesAngularJS?appStream.pipe(angularFilesort()):appStream,{addRootSlash:false}))
             //.pipe(replace(/<!-- autoInclude: jsApp !-->/g, autoInclude.jsApp))
             .pipe(replace(/@@minified/g, angus.env === 'dev' ? '' : '.min'))
             .pipe(gulp.dest(angus.appPath + '/dist'))
