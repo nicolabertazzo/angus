@@ -101,6 +101,11 @@ module.exports = {
 
     // When enabled, Angus will execute a few additional tasks such as html2js, ngconstant and ngmin.
     // Defaults to false
-    usesAngularJS: false
+    usesAngularJS: false,
+    
+    // When enabled, Angus will convert all .properties files into assets folder to JSON format.
+    // Useful when standard i18n properties are used as source translation files.
+    // Defaults to false
+    convertI18nProperties: false    
 
 };

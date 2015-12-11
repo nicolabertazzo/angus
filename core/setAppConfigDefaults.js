@@ -26,6 +26,7 @@ module.exports = function (appConfig) {
     appConfig.useJsHint = typeof appConfig.useJsHint === 'undefined' ? true : appConfig.useJsHint;
     appConfig.usesAngularJS = appConfig.usesAngularJS || false;
     appConfig.usesCoffeeScript = appConfig.usesCoffeeScript || false;
+    appConfig.convertI18nProperties = appConfig.convertI18nProperties || false;
 
 
     if (appConfig.cssCompiler === 'sass') {

@@ -171,6 +171,10 @@ Defaults to `karma`
 Whether or not Angus should report JSHint errors. Angus will not break when errors are found, only warn you about them.
 Defaults to `true`
 
+##### `convertI18nProperties` (optional)
+When enabled, Angus will convert all .properties files into assets folder to JSON format. Useful when standard i18n properties are used as source translation files.
+Defaults to `false`
+
 ##### `usesAngularJS` (optional)
 When true, Angus will execute additional AngularJS specific tasks. These include `ng-annotate` and `html2js`.
 Defaults to `false
