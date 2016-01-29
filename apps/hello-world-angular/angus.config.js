@@ -119,6 +119,9 @@ module.exports = {
     // When enabled,Angus will convert all .properties files into assets folder to JSON format
     // useful when translation files are inserted as standard i18n properties files
     // Defaults to false
-    convertI18nProperties: false
+    convertI18nProperties: false,
+    
+    // Replace this string with SVN version (out of svnversion command)+current date when building prod
+    replaceWithSvnVersion: '<!-- inject:version -->no version info<!-- endinject -->'    
 
 };

@@ -1,6 +1,6 @@
 {
   "name": "angus",
-  "version": "0.13.4",
+  "version": "0.13.5",
   "homepage": "http://nickjanssen.github.io/angus",
   "author": "Nick Janssen <info@nickjanssen.com> (http://nickjanssen.com/)",
   "license": "MIT",
@@ -68,7 +68,8 @@
     "gulp-inject": "^3.0.0",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-rename": "^1.2.2",
-    "gulp-props2json": "^2.0.0"
+    "gulp-props2json": "^2.0.0",
+    "gulp-inject-string": "^1.1.0"    
   },
   "preferGlobal": true
 }

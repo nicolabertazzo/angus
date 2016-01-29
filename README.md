@@ -189,6 +189,9 @@ If you wish to be able to deploy to Amazon S3, you can add the `aws` object whic
 ##### `staticServerUrl` (optional)
 When given, angus will prepend all static resources with this URL on production. Common usecase is to upload your static files to a CDN (e.g. Amazon S3) and then add the URL of your bucket here.
 
+##### `replaceWithSvnVersion` (optional)
+If present, the value of this properties is considered as a string that is replaced (on all project files, but only when building prod) with the current version on SVN (output of command `svnstatus` on root project folder) concatenated to current date.
+
 Example `angus.config.js` file:
 ```
 module.exports = {
