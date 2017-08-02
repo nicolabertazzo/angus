@@ -15,10 +15,11 @@ var streamqueue = require('streamqueue');
 module.exports = function (angus, gulp) {
     return function () {
         
-        var version = 'version:';
+        var version = '';
         var replaceVersion = 'NO-REPLACE-am3m242scl2of2342mcpm23-'+Math.random();
         if(angus.appConfig.replaceWithSvnVersion) {
             try{
+            	  version += 'version:';
                 version += child_process.execSync('svnversion',{cwd: angus.appPath}).toString().trim();
             } catch (err) {
                 version += '?';
@@ -29,12 +30,13 @@ module.exports = function (angus, gulp) {
         }
         if(angus.appConfig.replaceWithGitVersion) {
             try{
-                version += child_process.execFileSync('git',[ "rev-parse", "--short", "HEAD" ],{env: process.env, cwd: angus.appPath}).toString().trim();
+                //version += child_process.execFileSync('git',[ "rev-parse", "--short", "HEAD" ],{env: process.env, cwd: angus.appPath}).toString().trim();
+                version += child_process.execSync('echo $(git rev-parse --abbrev-ref HEAD)@$(git rev-parse --short HEAD)...',{env: process.env, cwd: angus.appPath}).toString().trim();
             } catch (err) {
                 console.log(err);
                 version += '?';
             }
-            version += ' build:'+new Date().toISOString();
+            version += ' '+new Date().toISOString();
             replaceVersion = angus.appConfig.replaceWithGitVersion;
             gutil.log(gutil.colors.green('version on GIT: '+version));
         }        
