@@ -192,6 +192,9 @@ When given, angus will prepend all static resources with this URL on production.
 ##### `replaceWithSvnVersion` (optional)
 If present, the value of this properties is considered as a string that is replaced (on all project files, but only when building prod) with the current version on SVN (output of command `svnstatus` on root project folder) concatenated to current date.
 
+##### `replaceWithGitVersion` (optional)
+If present, the value of this properties is considered as a string that is replaced (on all project files, but only when building prod) with the current version on GIT (output of command `git rev-parse --short` on root project folder) concatenated to current date.
+
 Example `angus.config.js` file:
 ```
 module.exports = {

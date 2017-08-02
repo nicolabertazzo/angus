@@ -8,6 +8,7 @@ var child_process = require('child_process');
 var gutil = require('gulp-util');
 // var order = require('gulp-order');
 
+
 var streams = require('../streams');
 var streamqueue = require('streamqueue');
 
@@ -26,6 +27,17 @@ module.exports = function (angus, gulp) {
             replaceVersion = angus.appConfig.replaceWithSvnVersion;
             gutil.log(gutil.colors.green('version on SVN: '+version));
         }
+        if(angus.appConfig.replaceWithGitVersion) {
+            try{
+                version += child_process.execFileSync('git',[ "rev-parse", "--short", "HEAD" ],{env: process.env, cwd: angus.appPath}).toString().trim();
+            } catch (err) {
+                console.log(err);
+                version += '?';
+            }
+            version += ' build:'+new Date().toISOString();
+            replaceVersion = angus.appConfig.replaceWithGitVersion;
+            gutil.log(gutil.colors.green('version on GIT: '+version));
+        }        
         
         return streamqueue({ objectMode: true },
                 streams.jsLib(angus, gulp),
@@ -39,9 +51,11 @@ module.exports = function (angus, gulp) {
             //     // angus.appPath + '/src/**/*',
             // ]))
             .pipe(injectString.replace(replaceVersion, version))
-            .pipe(concat('app.min.js'))
+            .pipe(concat('app.min.js', {newLine: ';\r\n'}))
             .pipe(ngAnnotate())
-            .pipe(uglify())
+            .pipe(uglify().on('error', function(e){
+				        console.log(e);
+				     }))
             .pipe(gulp.dest(angus.appPath + '/dist/js'));
     };
 };
