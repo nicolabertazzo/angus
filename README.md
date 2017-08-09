@@ -159,6 +159,12 @@ A list of NPM packages this app will use. Each package will be installed using t
 ##### `port` (optional)
 The port your local server which will be listening to when running Angus. Defaults to `9000`
 
+##### `serverTimeoutMinutes` (optional)
+Customize the default http request timeout (value in minutes) of your local server which will be listening to when running Angus.
+
+##### `liveReload` (optional)
+Enable/disable the liveReload feauture of your local server which will be listening to when running Angus. Defaults to `true`
+
 ##### `cssCompiler` (optional)
 Which CSS compiler to use. Can be `none`, `sass` or `less`.
 Defaults to `sass`
