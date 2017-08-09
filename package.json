@@ -1,16 +1,20 @@
 {
   "name": "angus",
-  "version": "0.13.6",
+  "version": "0.13.7",
   "homepage": "http://nickjanssen.github.io/angus",
   "author": "Nick Janssen <info@nickjanssen.com> (http://nickjanssen.com/)",
   "license": "MIT",
   "description": "Declarative build tool for the web.",
-  "bugs": "https://github.com/traycold/angus/issues",
+  "bugs": {
+    "url": "https://github.com/traycold/angus/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:traycold/angus.git"
+    "url": "git+ssh://git@github.com/traycold/angus.git"
   },
-  "bin": "angus.js",
+  "bin": {
+    "angus": "angus.js"
+  },
   "engines": {
     "node": ">=0.10.0",
     "npm": ">=1.2.10"
@@ -71,5 +75,9 @@
     "gulp-props2json": "^2.0.0",
     "gulp-inject-string": "^1.1.0"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "main": "angus.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
